@@ -5,8 +5,8 @@ RUN apk add --no-cache aws-cli \
     && mkdir /home/azion/.aws \
     && chown 1000:1000 /home/azion/.aws
 
-ENTRYPOINT ["/usr/bin/aws"]
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 USER 1000
-
-WORKDIR /home/azion

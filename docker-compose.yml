@@ -1,1 +1,6 @@
 version: "3"
+
+services:
+  aws-cli:
+    build:
+      context: "."

@@ -6,12 +6,12 @@ if [ ! -f "/home/azion/.aws/credentials" ]; then
     aws configure
 fi
 
-if [ ! -f "/home/azion/.aws/identity.json" ]; then
+if [ ! -s "/home/azion/.aws/identity.json" ]; then
     aws sts get-caller-identity > "/home/azion/.aws/identity.json"
 fi
 
 SESSION_EXPIRATION=0
-if [ -f "/home/azion/.aws/session.json" ]; then
+if [ -s "/home/azion/.aws/session.json" ]; then
     EXPIRATION=`jq --raw-output .Credentials.Expiration "/home/azion/.aws/session.json"`
     SESSION_EXPIRATION=`date -d"$EXPIRATION" +%s`
 fi

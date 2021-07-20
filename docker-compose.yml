@@ -4,3 +4,8 @@ services:
   aws:
     build:
       context: "."
+    volumes:
+      - "credentials:/home/azion/.aws"
+
+volumes:
+  credentials:

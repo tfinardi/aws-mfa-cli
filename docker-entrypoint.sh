@@ -24,4 +24,8 @@ if [ "$SESSION_EXPIRATION" -le "$CURRENT_DATETIME" ]; then
     aws sts get-session-token --serial-number "$AWS_SERIAL_NUMBER" --token-code "$AWS_TOKEN_CODE" > "/home/azion/.aws/session.json"
 fi
 
+export AWS_ACCESS_KEY_ID=`jq --raw-output .Credentials.AccessKeyId "/home/azion/.aws/session.json"`
+export AWS_SECRET_ACCESS_KEY=`jq --raw-output .Credentials.SecretAccessKey "/home/azion/.aws/session.json"`
+export AWS_SESSION_TOKEN=`jq --raw-output .Credentials.SessionToken "/home/azion/.aws/session.json"`
+
 aws $*
